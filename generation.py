@@ -6,8 +6,12 @@ def generate_response(question, results):
     Generate a response based on the question and the retrieved results.
     """
     documents = results['documents'][0]
-    context = '\n'.join(documents)
+    metadatas = results['metadatas'][0]
+    context = ""
     
+    for meta, doc in zip(metadatas, documents):
+        context += f"Title: {meta['title']}\nExcerpt: {doc}\n\n"
+        
     prompt = f"""
     You are a Harry Potter expert. Use ONLY the following script excerpts to answer the question.
     If the answer is not contained within the excerpts, say "There is no information about this in the harry potter script."

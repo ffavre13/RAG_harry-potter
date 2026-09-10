@@ -24,7 +24,7 @@ def initialize_context():
             "url": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=harry-potter-and-the-prisoner-of-azkaban"
         }
     ]
-    nltk.download('punkt')
+    nltk.download('punkt_tab')
     all_chunks = []
     
     print("Loading Harry Potter movie scripts...")    
