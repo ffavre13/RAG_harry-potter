@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "beautifulsoup4>=4.15.0",
+    "chromadb>=1.5.9",
     "nltk>=3.10.3",
+    "ollama>=0.6.2",
     "requests>=2.34.2",
 ]

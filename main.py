@@ -1,5 +1,8 @@
 from dataIngestion import load_scripts, clean_script, split_script_into_chunks
+from embeddings import generate_embeddings, save_embeddings_to_chromadb, is_embeddings_saved
+from retrieval import search
 import nltk
+import chromadb
 
 def initialize_context():
     """
@@ -34,7 +37,20 @@ def initialize_context():
     return all_chunks
 
 def main():
-    initialize_context()
+    # ChromaDB client setup
+    client = chromadb.PersistentClient(path="./chroma_db")
+    collection = client.get_or_create_collection(name="harry_potter_scripts")
+    
+    # Check if embeddings are already saved in the ChromaDB collection
+    if is_embeddings_saved(collection):
+        print("Embeddings are already saved in ChromaDB. Skipping embedding generation.")
+    else:
+        print("Embeddings not found in ChromaDB. Generating embeddings...")
+        chunks = initialize_context()
+        embeddings = generate_embeddings(chunks)
+        save_embeddings_to_chromadb(embeddings, collection)
+
+    
 
 if __name__ == "__main__":
     main()
