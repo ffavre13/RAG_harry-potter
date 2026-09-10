@@ -1,8 +1,10 @@
 from dataIngestion import load_scripts, clean_script, split_script_into_chunks
 from embeddings import generate_embeddings, save_embeddings_to_chromadb, is_embeddings_saved
 from retrieval import search
+from generation import generate_response
 import nltk
 import chromadb
+from dotenv import load_dotenv
 
 def initialize_context():
     """
@@ -41,6 +43,8 @@ def main():
     client = chromadb.PersistentClient(path="./chroma_db")
     collection = client.get_or_create_collection(name="harry_potter_scripts")
     
+    load_dotenv()  # Load environment variables from .env file
+    
     # Check if embeddings are already saved in the ChromaDB collection
     if is_embeddings_saved(collection):
         print("Embeddings are already saved in ChromaDB. Skipping embedding generation.")
@@ -50,7 +54,19 @@ def main():
         embeddings = generate_embeddings(chunks)
         save_embeddings_to_chromadb(embeddings, collection)
 
-    
+    while True:
+        question = input("\nEnter your question about Harry Potter (or type 'q' to quit): ")
+        if question.lower() == 'q':
+            print("Exiting the program.")
+            break
+        
+        # Search for relevant chunks in the ChromaDB collection
+        results = search(question, collection)
+        
+        # Generate a response based on the question and the retrieved results
+        answer = generate_response(question, results)
 
+        print(f"\nAnswer: {answer}")
+        
 if __name__ == "__main__":
     main()

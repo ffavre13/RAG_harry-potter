@@ -2176,6 +2176,7 @@ dependencies = [
     { name = "chromadb" },
     { name = "nltk" },
     { name = "ollama" },
+    { name = "python-dotenv" },
     { name = "requests" },
 ]
 
@@ -2185,6 +2186,7 @@ requires-dist = [
     { name = "chromadb", specifier = ">=1.5.9" },
     { name = "nltk", specifier = ">=3.10.3" },
     { name = "ollama", specifier = ">=0.6.2" },
+    { name = "python-dotenv", specifier = ">=1.2.3" },
     { name = "requests", specifier = ">=2.34.2" },
 ]
 
