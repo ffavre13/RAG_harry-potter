@@ -33,3 +33,8 @@ ollama pull embeddinggemma
 ```bash
 uv run main.py
 ```
+
+(optional) You can also run the Streamlit app to interact with the RAG system through a web interface:
+```bash
+uv run streamlit run app.py
+```

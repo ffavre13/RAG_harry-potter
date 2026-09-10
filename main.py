@@ -38,7 +38,7 @@ def initialize_context():
         
     return all_chunks
 
-def main():
+def init():
     # ChromaDB client setup
     client = chromadb.PersistentClient(path="./chroma_db")
     collection = client.get_or_create_collection(name="harry_potter_scripts")
@@ -53,6 +53,11 @@ def main():
         chunks = initialize_context()
         embeddings = generate_embeddings(chunks)
         save_embeddings_to_chromadb(embeddings, collection)
+
+    return collection
+
+def main():
+    collection = init()
 
     while True:
         question = input("\nEnter your question about Harry Potter (or type 'q' to quit): ")
