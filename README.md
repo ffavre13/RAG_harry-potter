@@ -38,3 +38,13 @@ uv run main.py
 ```bash
 uv run streamlit run app.py
 ```
+
+## RAG pipeline
+The RAG pipeline consists of the following steps:
+1. **Data ingestion**: The movie scripts are ingested and processed to create a context for question answering.
+2. **Embedding generation**: The 'embeddinggemma' model is used to generate embeddings for the ingested data. The embeddings vectors are stored in a vector database for efficient retrieval.
+3. **Retrieval**: When a user asks a question, the system generates an embedding vector for the question and retrieves the top-k most similar embeddings from the vector database.
+4. **Generation**: The retrieved context is then passed to the 'gemma4:31b' model along with the user's question to generate a coherent and contextually relevant answer.
+
+The pipeline is represented in the following diagram:
+![RAG pipeline diagram](assets/RAG_pipeline.png)
