@@ -47,4 +47,4 @@ The RAG pipeline consists of the following steps:
 4. **Generation**: The retrieved context is then passed to the 'gemma4:31b' model along with the user's question to generate a coherent and contextually relevant answer.
 
 The pipeline is represented in the following diagram:
-![RAG pipeline diagram](assets/RAG_pipeline.png)
+![RAG pipeline diagram](assets/RAG_pipeline.svg)
